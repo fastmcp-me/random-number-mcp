@@ -22,10 +22,12 @@ class MCPClient:
     async def start_server(self):
         """Start the MCP server process."""
         self.process = await asyncio.create_subprocess_exec(
-            sys.executable, "-m", "random_number_mcp.server",
+            sys.executable,
+            "-m",
+            "random_number_mcp.server",
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE
+            stderr=asyncio.subprocess.PIPE,
         )
         print("✅ MCP server started")
 
@@ -39,7 +41,7 @@ class MCPClient:
             "jsonrpc": "2.0",
             "id": self.request_id,
             "method": method,
-            "params": params
+            "params": params,
         }
 
         request_json = json.dumps(request) + "\n"
@@ -53,10 +55,9 @@ class MCPClient:
 
     async def call_tool(self, tool_name: str, arguments: dict[str, Any]) -> Any:
         """Call a tool on the MCP server."""
-        response = await self.send_request("tools/call", {
-            "name": tool_name,
-            "arguments": arguments
-        })
+        response = await self.send_request(
+            "tools/call", {"name": tool_name, "arguments": arguments}
+        )
 
         if "error" in response:
             raise Exception(f"Tool error: {response['error']}")
@@ -78,7 +79,7 @@ async def demo_random_tools():
     try:
         await client.start_server()
 
-        print("\n🎲 Random Number MCP Demo\n" + "="*50)
+        print("\n🎲 Random Number MCP Demo\n" + "=" * 50)
 
         # Demo random_int
         print("\n1. random_int - Generate random integers")
@@ -99,17 +100,15 @@ async def demo_random_tools():
         # Demo random_choices
         print("\n3. random_choices - Choose from population")
         population = ["apple", "banana", "cherry", "date", "elderberry"]
-        result = await client.call_tool("random_choices", {
-            "population": population,
-            "k": 1
-        })
+        result = await client.call_tool(
+            "random_choices", {"population": population, "k": 1}
+        )
         print(f"   Random choice from fruits: {result}")
 
-        result = await client.call_tool("random_choices", {
-            "population": population,
-            "k": 3,
-            "weights": [0.4, 0.3, 0.2, 0.1, 0.0]
-        })
+        result = await client.call_tool(
+            "random_choices",
+            {"population": population, "k": 3, "weights": [0.4, 0.3, 0.2, 0.1, 0.0]},
+        )
         print(f"   3 weighted choices: {result}")
 
         # Demo random_shuffle
@@ -135,7 +134,7 @@ async def demo_random_tools():
         result = await client.call_tool("secure_random_int", {"upper_bound": 6})
         print(f"   Secure dice roll (0-5): {result}")
 
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("✅ All tools demonstrated successfully!")
 
     except Exception as e:
@@ -155,7 +154,7 @@ async def demo_error_handling():
     try:
         await client.start_server()
 
-        print("\n🚨 Error Handling Demo\n" + "="*40)
+        print("\n🚨 Error Handling Demo\n" + "=" * 40)
 
         # Test invalid range
         print("\n1. Testing invalid range (low > high)")
@@ -178,7 +177,7 @@ async def demo_error_handling():
         except Exception as e:
             print(f"   Expected error: {e}")
 
-        print("\n" + "="*40)
+        print("\n" + "=" * 40)
         print("✅ Error handling working correctly!")
 
     except Exception as e:

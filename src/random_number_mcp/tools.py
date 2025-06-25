@@ -55,9 +55,7 @@ def random_float(low: float = 0.0, high: float = 1.0) -> float:
 
 
 def random_choices(
-    population: list[Any],
-    k: int = 1,
-    weights: list[int | float] | None = None
+    population: list[Any], k: int = 1, weights: list[int | float] | None = None
 ) -> list[Any]:
     """Choose k items from population with replacement, optionally weighted.
 

@@ -99,7 +99,9 @@ class TestRandomChoices:
         for item in result:
             assert item in sample_population
 
-    def test_random_choices_with_weights(self, sample_population: list[Any], sample_weights: list[float]):
+    def test_random_choices_with_weights(
+        self, sample_population: list[Any], sample_weights: list[float]
+    ):
         """Test random choices with weights."""
         result = random_choices(sample_population, k=2, weights=sample_weights)
         assert isinstance(result, list)
@@ -124,7 +126,9 @@ class TestRandomChoices:
 
     def test_random_choices_mismatched_weights(self, sample_population: list[Any]):
         """Test random choices with mismatched weights length."""
-        with pytest.raises(ValueError, match="Weights list length .* must match population length"):
+        with pytest.raises(
+            ValueError, match="Weights list length .* must match population length"
+        ):
             random_choices(sample_population, weights=[0.5, 0.5])
 
 
@@ -166,14 +170,14 @@ class TestSecureTokenHex:
         result = secure_token_hex()
         assert isinstance(result, str)
         assert len(result) == 64  # 32 bytes * 2 hex chars per byte
-        assert re.match(r'^[0-9a-f]+$', result)
+        assert re.match(r"^[0-9a-f]+$", result)
 
     def test_secure_token_hex_custom_bytes(self):
         """Test secure token hex with custom byte count."""
         result = secure_token_hex(16)
         assert isinstance(result, str)
         assert len(result) == 32  # 16 bytes * 2 hex chars per byte
-        assert re.match(r'^[0-9a-f]+$', result)
+        assert re.match(r"^[0-9a-f]+$", result)
 
     def test_secure_token_hex_zero_bytes(self):
         """Test secure token hex with zero bytes."""
