@@ -2,6 +2,10 @@
 
 Production-ready MCP server that provides LLMs with essential random generation abilities --- built entirely on Python's standard library.
 
+<a href="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp/badge" alt="Random Number MCP server" />
+</a>
+
 ## 🎲 Tools
 
 
@@ -21,7 +25,7 @@ Production-ready MCP server that provides LLMs with essential random generation 
 
 Add this to your Claude Desktop configuration file:
 
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  
 **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
 
 ```json
