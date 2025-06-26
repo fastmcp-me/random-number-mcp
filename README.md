@@ -1,6 +1,6 @@
 # Random Number MCP
 
-Production-ready MCP server that provides LLMs with essential random generation abilities --- built entirely on Python's standard library.
+Production-ready MCP server that provides LLMs with essential random generation abilities, built entirely on Python's standard library.
 
 ## 🎲 Tools
 
@@ -21,7 +21,7 @@ Production-ready MCP server that provides LLMs with essential random generation 
 
 Add this to your Claude Desktop configuration file:
 
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`   
 **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
 
 ```json
@@ -192,9 +192,10 @@ uv build
 uv run --with dist/*.whl random-number-mcp
 ```
 
-### Notes
+### Release
 
-- The server communicates via STDIO using JSON-RPC 2.0 protocol.
+Draft a release with the GitHub UI. The GitHub workflow will automatically sync
+the release with PyPI.
 
 ## Testing with MCP Inspector
 
