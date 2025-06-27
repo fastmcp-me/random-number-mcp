@@ -2,6 +2,11 @@
 
 Production-ready MCP server that provides LLMs with essential random generation abilities, built entirely on Python's standard library.
 
+## 📺 Demo Video
+
+https://github.com/user-attachments/assets/303a441a-2b10-47e3-b2a5-c8b51840e362
+
+
 ## 🎲 Tools
 
 
