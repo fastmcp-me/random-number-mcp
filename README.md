@@ -6,6 +6,9 @@ Production-ready MCP server that provides LLMs with essential random generation 
 
 https://github.com/user-attachments/assets/303a441a-2b10-47e3-b2a5-c8b51840e362
 
+<a href="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp/badge" alt="Random Number MCP server" />
+</a>
 
 ## 🎲 Tools
 
