@@ -153,7 +153,9 @@ class TestRandomChoices:
         """Test random choices with an invalid JSON string for weights."""
         weights_str = "[0.1, 0.2, 0.3, 0.25, 0.15"  # Invalid JSON
         with pytest.raises(ValueError, match="Invalid JSON string for weights"):
-            server_random_choices.fn(population=sample_population, k=1, weights=weights_str)
+            server_random_choices.fn(
+                population=sample_population, k=1, weights=weights_str
+            )
 
     def test_random_choices_with_mismatched_string_weights(
         self, sample_population: list[Any]
@@ -163,7 +165,9 @@ class TestRandomChoices:
         with pytest.raises(
             ValueError, match="Weights list length .* must match population length"
         ):
-            server_random_choices.fn(population=sample_population, k=1, weights=weights_str)
+            server_random_choices.fn(
+                population=sample_population, k=1, weights=weights_str
+            )
 
 
 class TestRandomShuffle:
@@ -232,9 +236,13 @@ class TestRandomSample:
         with pytest.raises(ValueError, match="k must be non-negative"):
             random_sample(sample_population, k=-1)
 
-    def test_random_sample_k_greater_than_population(self, sample_population: list[Any]):
+    def test_random_sample_k_greater_than_population(
+        self, sample_population: list[Any]
+    ):
         """Test random sample with k greater than population size."""
-        with pytest.raises(ValueError, match="Sample size k cannot be greater than population size"):
+        with pytest.raises(
+            ValueError, match="Sample size k cannot be greater than population size"
+        ):
             random_sample(sample_population, k=len(sample_population) + 1)
 
     def test_random_sample_non_integer_k(self, sample_population: list[Any]):
