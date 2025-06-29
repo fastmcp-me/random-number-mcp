@@ -11,6 +11,7 @@ Essential random number generation utilities from the Python standard library, i
 | `random_float`      | Generate random floats                       | `random.uniform()`    |
 | `random_choices`    | Choose items from a list (optional weights)  | `random.choices()`    |
 | `random_shuffle`    | Return a new list with items shuffled        | `random.sample()`     |
+| `random_sample`     | Choose k unique items from population        | `random.sample()`     |
 | `secure_token_hex`  | Generate cryptographically secure hex tokens | `secrets.token_hex()` |
 | `secure_random_int` | Generate cryptographically secure integers   | `secrets.randbelow()` |
 
@@ -109,6 +110,25 @@ Return a new list with items in random order.
   "name": "random_shuffle",
   "arguments": {
     "items": [1, 2, 3, 4, 5]
+  }
+}
+```
+
+### `random_sample`
+
+Choose k unique items from population without replacement.
+
+**Parameters:**
+- `population` (list): List of items to choose from
+- `k` (int): Number of items to choose
+
+**Example:**
+```json
+{
+  "name": "random_sample",
+  "arguments": {
+    "population": ["a", "b", "c", "d", "e"],
+    "k": 2
   }
 }
 ```
