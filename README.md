@@ -203,7 +203,7 @@ uv sync --dev
 uv run pytest
 
 # Run linting
-uv run ruff check
+uv run ruff check --fix
 uv run ruff format
 
 # Type checking
