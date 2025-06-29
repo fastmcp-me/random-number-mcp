@@ -250,7 +250,7 @@ uv run --with dist/*.whl random-number-mcp
         - Draft notes with coding agent using `git diff` context.
 
         ```
-        Update the @CHANGELOG.md for the latest release [VERSION].
+        Update the @CHANGELOG.md for the latest release.
         List all significant changes, bug fixes, and new features.
         Here's the git diff:
         [GIT_DIFF]

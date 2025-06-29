@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-06-29
+
+### Added
+- `random_sample` tool to choose k unique items from a population.
+- Support for JSON string input for `weights` in the `random_choices` tool.
+- Comprehensive test suite for `random_sample`.
+- Tests for `random_choices` with JSON string weights.
+- Demo video and MCP server badge in `README.md`.
+- MCP client configuration example in `README.md`.
+- Detailed release checklist for developers in `README.md`.
+
+### Changed
+- Updated project description in `README.md`.
+
 ## [0.1.0] - 2025-06-25
 
 ### Added
