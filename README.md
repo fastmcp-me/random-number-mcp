@@ -2,6 +2,14 @@
 
 Essential random number generation utilities from the Python standard library, including pseudorandom and cryptographically secure operations for integers, floats, weighted selections, list shuffling, and secure token generation.
 
+## 📺 Demo Video
+
+https://github.com/user-attachments/assets/303a441a-2b10-47e3-b2a5-c8b51840e362
+
+<a href="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@zazencodes/random-number-mcp/badge" alt="Random Number MCP server" />
+</a>
+
 ## 🎲 Tools
 
 
