@@ -1,5 +1,6 @@
 """Main MCP server using FastMCP to expose random number utilities."""
 
+import json
 from typing import Any
 
 from fastmcp import FastMCP
@@ -40,7 +41,9 @@ def random_float(low: float = 0.0, high: float = 1.0) -> float:
 
 @app.tool()
 def random_choices(
-    population: list[Any], k: int = 1, weights: list[int | float] | None = None
+    population: list[Any],
+    k: int = 1,
+    weights: list[int | float] | str | None = None,
 ) -> list[Any]:
     """Choose k items from population with replacement, optionally weighted.
 
@@ -52,6 +55,11 @@ def random_choices(
     Returns:
         List of k chosen items
     """
+    if isinstance(weights, str):
+        try:
+            weights = json.loads(weights)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON string for weights: {weights}") from e
     return tools.random_choices(population, k, weights)
 
 
