@@ -5,11 +5,15 @@ from typing import Any
 
 import pytest
 
+from random_number_mcp.server import (
+    random_choices as server_random_choices,
+)
 from random_number_mcp.tools import (
     random_choices,
     random_float,
     random_int,
     random_shuffle,
+    random_sample,
     secure_random_int,
     secure_token_hex,
 )
@@ -131,6 +135,36 @@ class TestRandomChoices:
         ):
             random_choices(sample_population, weights=[0.5, 0.5])
 
+    def test_random_choices_with_string_weights(self, sample_population: list[Any]):
+        """Test random choices with weights as a JSON string."""
+        weights_str = "[1, 3, 5, 2, 2]"
+        # Note: We are testing the server-level function here
+        result = server_random_choices.fn(
+            population=sample_population, k=3, weights=weights_str
+        )
+        assert isinstance(result, list)
+        assert len(result) == 3
+        for item in result:
+            assert item in sample_population
+
+    def test_random_choices_with_invalid_json_string_weights(
+        self, sample_population: list[Any]
+    ):
+        """Test random choices with an invalid JSON string for weights."""
+        weights_str = "[0.1, 0.2, 0.3, 0.25, 0.15"  # Invalid JSON
+        with pytest.raises(ValueError, match="Invalid JSON string for weights"):
+            server_random_choices.fn(population=sample_population, k=1, weights=weights_str)
+
+    def test_random_choices_with_mismatched_string_weights(
+        self, sample_population: list[Any]
+    ):
+        """Test random choices with mismatched weights length in a string."""
+        weights_str = "[0.5, 0.5]"
+        with pytest.raises(
+            ValueError, match="Weights list length .* must match population length"
+        ):
+            server_random_choices.fn(population=sample_population, k=1, weights=weights_str)
+
 
 class TestRandomShuffle:
     """Tests for random_shuffle function."""
@@ -160,6 +194,53 @@ class TestRandomShuffle:
         original = sample_numbers.copy()
         random_shuffle(sample_numbers)
         assert sample_numbers == original  # Original unchanged
+
+
+class TestRandomSample:
+    """Tests for random_sample function."""
+
+    def test_random_sample_basic(self, sample_population: list[Any]):
+        """Test basic random sample."""
+        result = random_sample(sample_population, k=1)
+        assert isinstance(result, list)
+        assert len(result) == 1
+        assert result[0] in sample_population
+
+    def test_random_sample_multiple(self, sample_population: list[Any]):
+        """Test random sample with multiple selections."""
+        result = random_sample(sample_population, k=3)
+        assert isinstance(result, list)
+        assert len(result) == 3
+        for item in result:
+            assert item in sample_population
+        assert len(set(result)) == 3  # Ensure no replacement
+
+    def test_random_sample_all_items(self, sample_population: list[Any]):
+        """Test random sample with k equal to population size."""
+        result = random_sample(sample_population, k=len(sample_population))
+        assert isinstance(result, list)
+        assert len(result) == len(sample_population)
+        assert set(result) == set(sample_population)
+
+    def test_random_sample_empty_population(self):
+        """Test random sample with empty population."""
+        with pytest.raises(ValueError, match="population cannot be empty"):
+            random_sample([], k=0)
+
+    def test_random_sample_negative_k(self, sample_population: list[Any]):
+        """Test random sample with negative k."""
+        with pytest.raises(ValueError, match="k must be non-negative"):
+            random_sample(sample_population, k=-1)
+
+    def test_random_sample_k_greater_than_population(self, sample_population: list[Any]):
+        """Test random sample with k greater than population size."""
+        with pytest.raises(ValueError, match="Sample size k cannot be greater than population size"):
+            random_sample(sample_population, k=len(sample_population) + 1)
+
+    def test_random_sample_non_integer_k(self, sample_population: list[Any]):
+        """Test random sample with non-integer k."""
+        with pytest.raises(TypeError, match="k must be an integer"):
+            random_sample(sample_population, k=1.5)
 
 
 class TestSecureTokenHex:
