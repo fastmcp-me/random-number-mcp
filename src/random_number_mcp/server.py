@@ -55,12 +55,15 @@ def random_choices(
     Returns:
         List of k chosen items
     """
+    numeric_weights: list[int | float] | None = None
     if isinstance(weights, str):
         try:
-            weights = json.loads(weights)
+            numeric_weights = json.loads(weights)
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON string for weights: {weights}") from e
-    return tools.random_choices(population, k, weights)
+    else:
+        numeric_weights = weights
+    return tools.random_choices(population, k, numeric_weights)
 
 
 @app.tool()
