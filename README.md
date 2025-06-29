@@ -1,6 +1,6 @@
 # Random Number MCP
 
-Production-ready MCP server that provides LLMs with essential random generation abilities, built entirely on Python's standard library.
+Essential random number generation utilities from the Python standard library, including pseudorandom and cryptographically secure operations for integers, floats, weighted selections, list shuffling, and secure token generation.
 
 ## 🎲 Tools
 
