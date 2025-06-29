@@ -77,6 +77,20 @@ def random_shuffle(items: list[Any]) -> list[Any]:
 
 
 @app.tool()
+def random_sample(population: list[Any], k: int) -> list[Any]:
+    """Choose k unique items from population without replacement.
+
+    Args:
+        population: List of items to choose from
+        k: Number of items to choose
+
+    Returns:
+        List of k unique chosen items
+    """
+    return tools.random_sample(population, k)
+
+
+@app.tool()
 def secure_token_hex(nbytes: int = 32) -> str:
     """Generate a secure random hex token.
 

@@ -98,6 +98,27 @@ def random_shuffle(items: list[Any]) -> list[Any]:
     return random.sample(items, len(items))
 
 
+def random_sample(population: list[Any], k: int) -> list[Any]:
+    """Choose k unique items from population without replacement.
+
+    Args:
+        population: List of items to choose from
+        k: Number of items to choose
+
+    Returns:
+        List of k unique chosen items
+
+    Raises:
+        ValueError: If population is empty, k < 0, or k > len(population)
+        TypeError: If k is not an integer
+    """
+    validate_list_not_empty(population, "population")
+    validate_positive_int(k, "k")
+    if k > len(population):
+        raise ValueError("Sample size k cannot be greater than population size")
+    return random.sample(population, k)
+
+
 def secure_token_hex(nbytes: int = 32) -> str:
     """Generate a secure random hex token.
 
