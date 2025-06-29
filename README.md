@@ -202,6 +202,26 @@ uv run ruff format
 uv run mypy src/
 ```
 
+### MCP Client Config
+
+```json
+{
+  "mcpServers": {
+    "random-number-dev": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<path_to_your_repo>/random-number-mcp",
+        "run",
+        "random-number-mcp"
+      ]
+    }
+  }
+}
+```
+
+**Note:** Replace `<path_to_your_repo>/random-number-mcp` with the absolute path to your cloned repository.
+
 ### Building
 
 ```bash
@@ -212,10 +232,28 @@ uv build
 uv run --with dist/*.whl random-number-mcp
 ```
 
-### Release
+### Release Checklist
 
-Draft a release with the GitHub UI. The GitHub workflow will automatically sync
-the release with PyPI.
+1.  **Update Version:**
+    - Increment the `version` number in `pyproject.toml` and `src/__init__.py`.
+
+2.  **Update Changelog:**
+    - Add a new entry in `CHANGELOG.md` for the release.
+        - Draft notes with coding agent using `git diff` context.
+
+        ```
+        Update the @CHANGELOG.md for the latest release [VERSION].
+        List all significant changes, bug fixes, and new features.
+        Here's the git diff:
+        [GIT_DIFF]
+        ```
+        
+    - Commit along with any other pending changes.
+
+3.  **Create GitHub Release:**
+    - Draft a new release on the GitHub UI.
+        - Tag release using UI.
+    - The GitHub workflow will automatically build and publish the package to PyPI.
 
 ## Testing with MCP Inspector
 
