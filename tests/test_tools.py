@@ -12,8 +12,8 @@ from random_number_mcp.tools import (
     random_choices,
     random_float,
     random_int,
-    random_shuffle,
     random_sample,
+    random_shuffle,
     secure_random_int,
     secure_token_hex,
 )
